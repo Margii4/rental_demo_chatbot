@@ -106,37 +106,35 @@ language = st.radio("🌍 Language / Lingua", ["English", "Italiano"])
 L = LANGUAGES[language]
 st.title(L["title"])
 
-# ===== Restart button with FULL reset =====
+# ===== Restart button with full session_state clear =====
 if st.button(L["restart"]):
-    # Удаляем все ключи из session_state для полного сброса формы
-    for key in list(st.session_state.keys()):
-        del st.session_state[key]
+    st.session_state.clear()
     st.rerun()
 
-# ===== Session state init =====
-if "answers" not in st.session_state:
-    st.session_state.answers = {}
+# ===== Default values (if session_state is empty after restart) =====
+default_answers = {
+    "district": "",
+    "price": "",
+    "furnished": "",
+    "pets": "",
+    "infrastructure": ""
+}
 
+for k, v in default_answers.items():
+    if k not in st.session_state:
+        st.session_state[k] = v
+
+# ===== FORM — using session_state for all inputs =====
 with st.form("filter_form"):
-    st.session_state.answers["district"] = st.text_input(
-        L["district"], value=st.session_state.answers.get("district", "")
-    )
-    st.session_state.answers["price"] = st.text_input(
-        L["price"], value=st.session_state.answers.get("price", "")
-    )
-    st.session_state.answers["furnished"] = st.text_input(
-        L["furnished"], value=st.session_state.answers.get("furnished", "")
-    )
-    st.session_state.answers["pets"] = st.text_input(
-        L["pets"], value=st.session_state.answers.get("pets", "")
-    )
-    st.session_state.answers["infrastructure"] = st.text_input(
-        L["infrastructure"], value=st.session_state.answers.get("infrastructure", "")
-    )
+    district = st.text_input(L["district"], value=st.session_state["district"], key="district")
+    price = st.text_input(L["price"], value=st.session_state["price"], key="price")
+    furnished = st.text_input(L["furnished"], value=st.session_state["furnished"], key="furnished")
+    pets = st.text_input(L["pets"], value=st.session_state["pets"], key="pets")
+    infrastructure = st.text_input(L["infrastructure"], value=st.session_state["infrastructure"], key="infrastructure")
     submit = st.form_submit_button(L["search"])
 
 if submit:
-    price_input = st.session_state.answers.get("price", "800-1500").replace("€", "").replace(" ", "")
+    price_input = price.replace("€", "").replace(" ", "")
     try:
         if "–" in price_input:
             price_min, price_max = [int(x) for x in price_input.split("–")]
@@ -146,14 +144,13 @@ if submit:
         st.error(L["invalid_price"])
         price_min, price_max = 0, 99999
 
-    user_district = st.session_state.answers.get("district", "").strip().lower()
-    user_furnished = st.session_state.answers.get("furnished", "").strip().lower()
-    user_pets = st.session_state.answers.get("pets", "").strip().lower()
-    user_infra = st.session_state.answers.get("infrastructure", "").strip().lower()
+    user_district = district.strip().lower()
+    user_furnished = furnished.strip().lower()
+    user_pets = pets.strip().lower()
+    user_infra = infrastructure.strip().lower()
 
     filtered = []
     for res in DEMO_LISTINGS:
-        # --- No AI call here! Data already in fields ---
         # Price filter
         try:
             res_price = int(res["price"].replace("€", "").replace("/month", "").replace(",", ""))
@@ -162,11 +159,11 @@ if submit:
         if not (price_min <= res_price <= price_max):
             continue
         # District filter
-        if user_district and user_district not in ["-", "skip", "not important", "any","no", ""]:
+        if user_district and user_district not in ["-", "skip", "not important", "any", "no", ""]:
             if user_district not in res["district"].lower():
                 continue
         # Furnished filter
-        if user_furnished and user_furnished not in ["-", "skip", "not important", "any","no", ""]:
+        if user_furnished and user_furnished not in ["-", "skip", "not important", "any", "no", ""]:
             furnished_positive = ["yes", "si", "arredato", "furnished", "oui"]
             furnished_negative = ["no", "non", "unfurnished", "senza arredo"]
             if any(word in user_furnished for word in furnished_positive):
@@ -177,7 +174,7 @@ if submit:
                     continue
         # Pets filter
         if user_pets and user_pets not in ["-", "skip", "not important", "any", "no", ""]:
-            pets_positive = ["yes", "si", "ammessi", "pet", "animali",]
+            pets_positive = ["yes", "si", "ammessi", "pet", "animali"]
             pets_negative = ["no", "non", "not allowed", "vietato"]
             if any(word in user_pets for word in pets_positive):
                 if res["pets_allowed"] is not True:
@@ -186,7 +183,7 @@ if submit:
                 if res["pets_allowed"] is True:
                     continue
         # Infrastructure/amenities filter
-        if user_infra and user_infra not in ["-", "skip", "not important", "any","no", "yes", ""]:
+        if user_infra and user_infra not in ["-", "skip", "not important", "any", "no", "yes", ""]:
             keywords = [x.strip() for x in user_infra.replace(",", " ").split()]
             if len(keywords) > 0:
                 amenities = [a.lower() for a in res.get("amenities", [])]
