@@ -1,6 +1,6 @@
   🏠 Rental Demo Chatbot
 
-[🌐  Live Demo on Streamlit Cloud  ](https://your-streamlit-cloud-link)  
+[🌐  Live Demo on Streamlit Cloud  ](https://rentaldemochatbot-mdneyrpycgq5yuizmqy9fq.streamlit.app/)  
 *(No installation required—runs instantly in your browser!)*
 
 A bilingual (English 🇬🇧 / Italian 🇮🇹) Streamlit chatbot for exploring demo rental listings in Milan.  
@@ -22,7 +22,7 @@ Designed for entry-level AI/Prompt Engineer positions, this project demonstrates
 
 1. Clone this repo:
     ```
-    git clone https://github.com/your-username/rental_demo_chatbot.git
+    git clone https://github.com/Margii4/rental_demo_chatbot.git
     cd rental_demo_chatbot
     ```
 2. Install dependencies:
@@ -37,4 +37,4 @@ Designed for entry-level AI/Prompt Engineer positions, this project demonstrates
 
 ---
 
-*No installation required to try the [live demo](https://your-streamlit-cloud-link)! For questions or feedback, feel free to contact me.*
+*No installation required to try the [live demo](https://rentaldemochatbot-mdneyrpycgq5yuizmqy9fq.streamlit.app/)! For questions or feedback, feel free to contact me.*
