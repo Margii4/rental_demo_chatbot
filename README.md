@@ -1,6 +1,6 @@
   🏠 Rental Demo Chatbot
 
-[🌐  Live Demo on Streamlit Cloud  ](https://rentaldemochatbot-mdneyrpycgq5yuizmqy9fq.streamlit.app/)  
+[🌐  Live Demo on Streamlit Cloud  ](https://rentaldemochatbot-xmkfmzgb6xcxys3mmkqte4.streamlit.app/)  
 *(No installation required—runs instantly in your browser!)*
 
 A bilingual (English 🇬🇧 / Italian 🇮🇹) Streamlit chatbot for exploring demo rental listings in Milan.  
@@ -37,4 +37,4 @@ Designed for entry-level AI/Prompt Engineer positions, this project demonstrates
 
 ---
 
-*No installation required to try the [live demo](https://rentaldemochatbot-mdneyrpycgq5yuizmqy9fq.streamlit.app/)! For questions or feedback, feel free to contact me.*
+*No installation required to try the [live demo](https://rentaldemochatbot-xmkfmzgb6xcxys3mmkqte4.streamlit.app/)! For questions or feedback, feel free to contact me.*
