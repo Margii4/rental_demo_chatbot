@@ -106,14 +106,16 @@ language = st.radio("🌍 Language / Lingua", ["English", "Italiano"])
 L = LANGUAGES[language]
 st.title(L["title"])
 
+# ===== Restart button with FULL reset =====
+if st.button(L["restart"]):
+    # Удаляем все ключи из session_state для полного сброса формы
+    for key in list(st.session_state.keys()):
+        del st.session_state[key]
+    st.rerun()
+
+# ===== Session state init =====
 if "answers" not in st.session_state:
     st.session_state.answers = {}
-
-if st.button(L["restart"]):
-    for key in ["answers"]:
-        if key in st.session_state:
-            del st.session_state[key]
-    st.rerun()
 
 with st.form("filter_form"):
     st.session_state.answers["district"] = st.text_input(
