@@ -6,6 +6,8 @@
 A bilingual (English 🇬🇧 / Italian 🇮🇹) Streamlit chatbot for exploring demo rental listings in Milan.  
 This project was created as a portfolio example to showcase skills in prompt engineering, UI prototyping, and structured data filtering. The app features a fully localized interface, flexible search filters, and easy CSV export. The code is AI-ready and can be quickly extended for LLM-powered parsing.
 
+---
+
    🚀 Key Advantages
 
 - 🌐 Instantly switch between English and Italian.
@@ -14,9 +16,13 @@ This project was created as a portfolio example to showcase skills in prompt eng
 - 📁 One-click CSV export of results.
 - 🤖 Easily adaptable for integration with LLMs (like OpenAI GPT).
 
+---
+
    ⚡️ Purpose
 
 Designed for entry-level AI/Prompt Engineer positions, this project demonstrates practical work with user input, multilingual interfaces, and data filtering. It’s a solid starting point for prototyping and real-world AI integrations.
+
+---
 
    🛠️ How to Run Locally
 
